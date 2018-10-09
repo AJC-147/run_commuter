@@ -12,6 +12,7 @@ var bodyParser = require("body-parser");
 //var keys = require("./keys.js");
 //var request = require("request");
 //var google = (keys.google.id);
+//var darksky = (keys.darksky.id);
 
 
 
