@@ -16,5 +16,13 @@
   "bugs": {
     "url": "https://github.com/mhanley00/run_commuter/issues"
   },
-  "homepage": "https://github.com/mhanley00/run_commuter#readme"
+  "homepage": "https://github.com/mhanley00/run_commuter#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "express-handlebars": "^3.0.0",
+    "express-static": "^1.2.6",
+    "handlebars": "^4.0.12",
+    "sequelize": "^4.39.0"
+  }
 }
