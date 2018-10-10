@@ -1,11 +1,14 @@
 var db = require("../models");
 var passport = require("../config/passport");
-
+var data = {
+  runners: dbrunners,
+  runs: dbruns
+}; //empty object or can add stuff to it
 
 
 module.exports = function(app) {
     app.post("/api/login", passport.authenticate("local"), function(req, res) {
-      res.json("/members");
+      res.json("/dashboard");
     });
   
     app.post("/api/signup", function(req, res) {
@@ -52,23 +55,23 @@ module.exports = function(app) {
 
   // app.get("/", function(req, res) {
   //   if (req.user) {
-  //     res.redirect("/members");
+  //     res.redirect("/dashboard");
   //   }
   //   res.sendFile(path.join(__dirname, "../public/signup.html"));
   // });
 
   app.get("/login", function(req, res) {
     if (req.user) {
-      res.redirect("/members");
+      res.redirect("/dashboard");
     }
-    res.sendFile(path.join(__dirname, "./"));
-    res.render("login", { runners: data }); //??? what do we want to render 
-    //before they log in?
+    //res.sendFile(path.join(__dirname, "./"));
+    res.render("login"); //yes, only need the html page because nothing custom here
   });
 
-  app.get("/members", isAuthenticated, function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/members.html"));
-    res.render("index", { runners: data }); //????
+  app.get("/dashboard", isAuthenticated, function(req, res) {
+    //res.sendFile(path.join(__dirname, "../public/dashboard.html"));
+    res.render("dashboard", { athlete: data }); //see var data above, 
   });
 
-};
+}; //res.body.runners
+//in handlebars- athlete.firstname, athlete.runtime etc
