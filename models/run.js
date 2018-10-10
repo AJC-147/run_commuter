@@ -1,0 +1,85 @@
+'use strict';
+module.exports = (sequelize, DataTypes) {
+    var Run = sequelize.define('Run', {
+        runid: {
+            allowNull: false,
+            autoIncrement: true,
+            primaryKey: true,
+            type: DataTypes.INTEGER
+        },
+        distance: {
+            type: DataTypes.DECIMAL,
+            allowNull: false,
+            validate: {
+            }
+        },
+        totalTime: {
+            type: DataTypes.TIME,
+            allowNull: false,
+            validate: {
+            }
+        },
+        averagePace: {
+            type: DataTypes.TIME,
+            allowNull: false,
+            validate: {
+            }
+        },
+        agPercent: {
+            type: DataTypes.DECIMAL,
+            allowNull: false,
+            validate: {
+                isDecimal: true,
+            }
+        },
+        dateTime: {
+            type: DataTypes.DATETIME,
+            allowNull: false,
+            validate: {
+            }
+        },
+        location: {
+            type: DataTypes.STRING,
+            allowNull: true,
+            validate: {
+                len: [1, 100]
+            }
+        },
+        temperature: {
+            type: DataTypes.DECIMAL,
+            allowNull: false,
+            validate: {
+            }
+        },
+        windMPH: {
+            type: DataTypes.DECIMAL,
+            allowNull: false
+        },
+        dewPoint: {
+            type: DataTypes.DECIMAL,
+            allowNull: false,
+            validate: {
+            }
+        },        
+    // It is possible to create foreign keys:
+ user_ID: {
+   type: DataTypes.INTEGER,
+   references: {
+     // This is a reference to another model
+     model: Runner,
+     // This is the column name of the referenced model
+     key: 'userid',
+     // This declares when to check the foreign key constraint. PostgreSQL only.
+     deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
+   }
+ }
+        
+    }, {
+        classMethods: {
+            associate: function (models) {
+                Run.hasOne(models.Runner);
+            }
+        }
+    });
+    return Run;
+};
