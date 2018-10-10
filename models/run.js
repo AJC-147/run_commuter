@@ -47,17 +47,17 @@ module.exports = (sequelize, DataTypes) {
         },
         temperature: {
             type: DataTypes.DECIMAL,
-            allowNull: false,
+            allowNull: true,
             validate: {
             }
         },
         windMPH: {
             type: DataTypes.DECIMAL,
-            allowNull: false
+            allowNull: true
         },
         dewPoint: {
             type: DataTypes.DECIMAL,
-            allowNull: false,
+            allowNull: true,
             validate: {
             }
         },        
