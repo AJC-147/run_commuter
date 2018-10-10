@@ -1,8 +1,8 @@
 var db = require("../models");
 var passport = require("../config/passport");
 var data = {
-  runners: dbrunners,
-  runs: dbruns
+  // runners: dbrunners,
+  // runs: dbruns
 }; //empty object or can add stuff to it
 
 
