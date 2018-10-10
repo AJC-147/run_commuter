@@ -1,5 +1,7 @@
+var Runner = require("../models");
+
 'use strict';
-module.exports = (sequelize, DataTypes) {
+module.exports = function(sequelize, DataTypes) {
     var Run = sequelize.define('Run', {
         runid: {
             allowNull: false,
@@ -33,7 +35,7 @@ module.exports = (sequelize, DataTypes) {
             }
         },
         dateTime: {
-            type: DataTypes.DATETIME,
+            type: DataTypes.DATE,
             allowNull: false,
             validate: {
             }
@@ -62,17 +64,17 @@ module.exports = (sequelize, DataTypes) {
             }
         },        
     // It is possible to create foreign keys:
- user_ID: {
-   type: DataTypes.INTEGER,
-   references: {
-     // This is a reference to another model
-     model: Runner,
-     // This is the column name of the referenced model
-     key: 'userid',
-     // This declares when to check the foreign key constraint. PostgreSQL only.
-     deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
-   }
- }
+// user_ID: {
+//   type: DataTypes.INTEGER,
+//   references: {
+//     // This is a reference to another model
+//     model: Runner,
+//     // This is the column name of the referenced model
+//     key: 'userid',
+//     // This declares when to check the foreign key constraint. PostgreSQL only.
+//     deferrable: DataTypes.Deferrable.INITIALLY_IMMEDIATE
+//   }
+// }
         
     }, {
         classMethods: {

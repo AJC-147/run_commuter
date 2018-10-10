@@ -1,5 +1,5 @@
 'use strict';
-module.exports = (sequelize, DataTypes) {
+module.exports = function(sequelize, DataTypes) {
     var Runner = sequelize.define('Runner', {
         userid: {
             allowNull: false,
@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) {
             allowNull: false
         },
         dob: {
-            type: DataTypes.DATE,
+            type: DataTypes.DATEONLY,
             allowNull: false,
             validate: {
                 isDate: true,
