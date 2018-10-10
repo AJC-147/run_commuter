@@ -1,3 +1,5 @@
+var RunM = require("../models");
+
 'use strict';
 module.exports = function(sequelize, DataTypes) {
     var Runner = sequelize.define('Runner', {
@@ -61,7 +63,7 @@ module.exports = function(sequelize, DataTypes) {
     }, {
         classMethods: {
             associate: function (models) {
-                Runner.hasMany(models.Run);
+                Runner.hasMany(models.RunM);
             }
         }
     });

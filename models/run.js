@@ -1,4 +1,4 @@
-var Runner = require("../models");
+var RunnerM = require("../models");
 
 'use strict';
 module.exports = function(sequelize, DataTypes) {
@@ -79,7 +79,7 @@ module.exports = function(sequelize, DataTypes) {
     }, {
         classMethods: {
             associate: function (models) {
-                Run.hasOne(models.Runner);
+                Run.hasOne(models.RunnerM);
             }
         }
     });

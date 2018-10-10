@@ -1,12 +1,37 @@
 var db = require("../models");
 var passport = require("../config/passport");
-var data = {
-  // runners: dbrunners,
-  // runs: dbruns
-}; //empty object or can add stuff to it
+var path = require("path");
+
+var isAuthenticated = require("../config/middleware/isAuthenticated");
+//var data = {
+//  // runners: dbrunners,
+//  // runs: dbruns
+//}; //empty object or can add stuff to it
+
 
 
 module.exports = function(app) {
+    
+      // app.get("/", function(req, res) {
+  //   if (req.user) {
+  //     res.redirect("/dashboard");
+  //   }
+  //   res.sendFile(path.join(__dirname, "../public/signup.html"));
+  // });
+
+  app.get("/login", function(req, res) {
+    if (req.user) {
+      res.redirect("/dashboard");
+    }
+    //res.sendFile(path.join(__dirname, "./"));
+    res.render("login"); //yes, only need the html page because nothing custom here
+  });
+
+  app.get("/dashboard", isAuthenticated, function(req, res) {
+    //res.sendFile(path.join(__dirname, "../public/dashboard.html"));
+    res.render("dashboard", { athlete: data }); //see var data above, 
+  });
+    
     app.post("/api/login", passport.authenticate("local"), function(req, res) {
       res.json("/dashboard");
     });
@@ -42,36 +67,3 @@ module.exports = function(app) {
     });
   
   };
-
-// ______________________________________________________________________________
-// HTML ROUTES
-// -----–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-
-var path = require("path");
-
-var isAuthenticated = require("../config/middleware/isAuthenticated");
-
-module.exports = function(app) {
-
-  // app.get("/", function(req, res) {
-  //   if (req.user) {
-  //     res.redirect("/dashboard");
-  //   }
-  //   res.sendFile(path.join(__dirname, "../public/signup.html"));
-  // });
-
-  app.get("/login", function(req, res) {
-    if (req.user) {
-      res.redirect("/dashboard");
-    }
-    //res.sendFile(path.join(__dirname, "./"));
-    res.render("login"); //yes, only need the html page because nothing custom here
-  });
-
-  app.get("/dashboard", isAuthenticated, function(req, res) {
-    //res.sendFile(path.join(__dirname, "../public/dashboard.html"));
-    res.render("dashboard", { athlete: data }); //see var data above, 
-  });
-
-}; //res.body.runners
-//in handlebars- athlete.firstname, athlete.runtime etc

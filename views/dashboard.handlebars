@@ -47,7 +47,10 @@
   </ul>
   <!-- Start Main Section -->
   <div class="container" id="top-container">
-    <div class="row">
+    <div class="row"><h2>RUNS</h2>
+     {{#each runs}}
+      </div>
+      <div class="row">
       <div class=" input-field col s4 m4 l4">
         <input placeholder="Full Name" id="full-name" type="text" class="validate">
         <label for="full_name">Enter your Name</label>
@@ -169,7 +172,6 @@
 
 
   <!-- Script CDNS -->
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>

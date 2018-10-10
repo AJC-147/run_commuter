@@ -32,17 +32,20 @@ var PORT = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-//______________________________________________________________________________
-//ROUTER - Connecting to .js data in routing folder
-// ----
-var routes = require("./controllers/runnerController");
-//var routes = require("./controllers/runnerController");
-app.use(routes);
 
 //previous build static server below
 //app.use(serveStatic("./public/", {"index": ["index.html"]}));
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
+
+//______________________________________________________________________________
+//ROUTER - Connecting to .js data in routing folder
+// ----
+require("./controllers/runnerController")(app);
+//require("./controllers/runController")(app);
+//app.use(route2);
+//app.use(route1);
+
 
 // ______________________________________________________________________________
 //LISTENER - start server + Sequelize connection
