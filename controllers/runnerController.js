@@ -39,3 +39,36 @@ module.exports = function(app) {
     });
   
   };
+
+// ______________________________________________________________________________
+// HTML ROUTES
+// -----–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+var path = require("path");
+
+var isAuthenticated = require("../config/middleware/isAuthenticated");
+
+module.exports = function(app) {
+
+  // app.get("/", function(req, res) {
+  //   if (req.user) {
+  //     res.redirect("/members");
+  //   }
+  //   res.sendFile(path.join(__dirname, "../public/signup.html"));
+  // });
+
+  app.get("/login", function(req, res) {
+    if (req.user) {
+      res.redirect("/members");
+    }
+    res.sendFile(path.join(__dirname, "./"));
+    res.render("login", { runners: data }); //??? what do we want to render 
+    //before they log in?
+  });
+
+  app.get("/members", isAuthenticated, function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/members.html"));
+    res.render("index", { runners: data }); //????
+  });
+
+};
