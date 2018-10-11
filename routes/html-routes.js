@@ -16,7 +16,7 @@ module.exports = function(app) {
     if (req.user) {
       res.redirect("/members");
     }
-    res.render("index"); //do we need to specify views/index?
+    res.render("login"); //do we need to specify views/index?
   });
 
 //  app.get("/members", isAuthenticated, function(req, res) {

@@ -19,7 +19,19 @@ module.exports = function(app) {
       res.json(err);
     });
   });
-
+    
+    
+    app.get("/members", function(req, res) {
+  db.User.findAll()
+    .then(function(dbUser) {
+      var data = {
+            User: dbUser,
+//            runners: dbrunners,
+//            runs: dbruns
+        };
+      return res.render("members", data);
+    });
+});
 
 
   app.get("/api/user_data", function(req, res) {
