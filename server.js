@@ -1,58 +1,34 @@
-// ______________________________________________________________________________
-// DEPENDENCIES - npm packages + API keys
-// -----–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-//require("dotenv").config();  
 var express = require("express");
-var exphbs = require("express-handlebars");
-var serveStatic = require("serve-static")
 var bodyParser = require("body-parser");
+var session = require("express-session");
+var passport = require("./config/passport");
+
+var PORT = process.env.PORT || 8080;
 var db = require("./models");
 
-//var path = require("path");
-//var keys = require("./keys.js");
-//var request = require("request");
-//var google = (keys.google.id);
-//var darksky = (keys.darksky.id);
+var exphbs = require("express-handlebars");
 
-
-
-// ______________________________________________________________________________
-// EXPRESS - server setup
-// -----–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-var app = express(); //we're making an express server
-// Serve static content for the app from the "public" directory in the application directory.
-app.use(express.static("public"));
-// Parse request body as JSON
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-
-var PORT = process.env.PORT || 3000;
-
-// Express app will handle data parsing
-app.use(bodyParser.urlencoded({ extended: true }));
+var app = express();
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(express.static("public"));
+app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json()); //use anytime you're using ___.body
 
-//previous build static server below
-//app.use(serveStatic("./public/", {"index": ["index.html"]}));
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.engine("handlebars", exphbs({
+  defaultLayout: "main"
+}));
 app.set("view engine", "handlebars");
 
-//______________________________________________________________________________
-//ROUTER - Connecting to .js data in routing folder
-// ----
-require("./controllers/runnerController")(app);
-//require("./controllers/runController")(app);
-//app.use(route2);
-//app.use(route1);
+require("./routes/html-routes.js")(app);
+require("./routes/api-routes.js")(app);
 
-
-// ______________________________________________________________________________
-//LISTENER - start server + Sequelize connection
-// -----–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-
-db.sequelize.sync().then(function() { 
-app.listen(PORT, function() {
-    console.log("App listening on PORT: " + PORT);
+db.sequelize.sync().then(function() {
+  app.listen(PORT, function() {
+    console.log("==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.", PORT, PORT);
   });
 });

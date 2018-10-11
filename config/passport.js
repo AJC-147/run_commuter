@@ -5,25 +5,25 @@ var db = require("../models");
 
 passport.use(new LocalStrategy(
   {
-    runnerUsernameField: "email"
+    usernameField: "email"
   },
   function(email, password, done) {
     db.User.findOne({
       where: {
         email: email
       }
-    }).then(function(dbrun) {
-      if (!dbrun) {
+    }).then(function(dbUser) {
+      if (!dbUser) {
         return done(null, false, {
           message: "Incorrect email."
         });
       }
-      else if (!dbrun.validPassword(password)) {
+      else if (!dbUser.validPassword(password)) {
         return done(null, false, {
           message: "Incorrect password."
         });
       }
-      return done(null, dbrun);
+      return done(null, dbUser);
     });
   }
 ));

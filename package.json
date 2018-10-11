@@ -1,32 +1,28 @@
 {
-  "name": "run_commuter",
+  "name": "1-Passport-Example",
   "version": "1.0.0",
-  "description": "*Find Your Pace*",
+  "description": "",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "watch": "nodemon server.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mhanley00/run_commuter.git"
-  },
+  "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/mhanley00/run_commuter/issues"
-  },
-  "homepage": "https://github.com/mhanley00/run_commuter#readme",
   "dependencies": {
-    "body-parser": "^1.18.3",
-    "express": "^4.16.3",
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
     "express-handlebars": "^3.0.0",
+    "express-session": "^1.14.2",
     "express-static": "^1.2.6",
     "handlebars": "^4.0.12",
-    "mysql2": "^1.6.1",
-    "sequelize": "^4.39.0",
+    "mysql2": "^1.3.6",
+    "sequelize": "^4.3.1",
     "sequelize-cli": "^4.1.1",
-    "passport": "^0.4.0",
+    "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "passport-openid": "^0.4.0"
   }
