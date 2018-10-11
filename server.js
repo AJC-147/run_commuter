@@ -17,7 +17,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json()); //use anytime you're using ___.body
+app.use(express.json()); //use anytime you're using req.body
 
 app.engine("handlebars", exphbs({
   defaultLayout: "main"
