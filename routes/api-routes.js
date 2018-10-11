@@ -22,14 +22,25 @@ module.exports = function(app) {
     
     
     app.get("/members", function(req, res) {
-  db.User.findAll()
+  db.User.findAll(
+      {
+      where: {
+          email: req.user.email
+      }
+  }
+  )
     .then(function(dbUser) {
+      console.log(dbUser);
       var data = {
-            User: dbUser,
+            User: dbUser
 //            runners: dbrunners,
 //            runs: dbruns
         };
+      console.log(req.user)
       return res.render("members", data);
+      
+      // INCLUDE ERROR HANDLING: IF NO DATA, REDIRECT TO LOGIN
+      
     });
 });
 
