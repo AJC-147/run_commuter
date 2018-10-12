@@ -1,16 +1,24 @@
 {
   "name": "run_commuter",
-  "version": "",
-  "description": "",
+  "version": "1.0.0",
+  "description": "*find your pace*",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "watch": "nodemon server.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mhanley00/run_commuter.git"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mhanley00/run_commuter/issues"
+  },
+  "homepage": "https://github.com/mhanley00/run_commuter#readme",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.2",

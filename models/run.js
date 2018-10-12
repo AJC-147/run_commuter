@@ -1,6 +1,7 @@
 var db = require("../models");
 var bcrypt = require("bcrypt-nodejs");
 
+'use strict';
 module.exports = function(sequelize, DataTypes) {
     var Run = sequelize.define('Run', {
         runid: {

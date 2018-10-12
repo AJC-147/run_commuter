@@ -1,15 +1,24 @@
 var express = require("express");
+var exphbs = require("express-handlebars");
+var serveStatic = require("serve-static")
 var bodyParser = require("body-parser");
 var session = require("express-session");
 var passport = require("./config/passport");
-
-var PORT = process.env.PORT || 8080;
 var db = require("./models");
 
-var exphbs = require("express-handlebars");
+//var path = require("path");
+//var keys = require("./keys.js");
+//var request = require("request");
+//var google = (keys.google.id);
+//var darksky = (keys.darksky.id);
+
+var PORT = process.env.PORT || 8080;
+
+//require("dotenv").config();
+
 
 var app = express();
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static("public"));
 app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
@@ -26,6 +35,8 @@ app.set("view engine", "handlebars");
 
 require("./routes/html-routes.js")(app);
 require("./routes/api-routes.js")(app);
+
+require("./controllers/runner_controller")(app);
 
 db.sequelize.sync().then(function() {
   app.listen(PORT, function() {
