@@ -1,15 +1,15 @@
-var db = require("../models");
+//var db = require("../models");
 var bcrypt = require("bcrypt-nodejs");
 
 'use strict';
 module.exports = function (sequelize, DataTypes) {
     var Run = sequelize.define('Run', {
-            runid: {
-                allowNull: false,
-                autoIncrement: true,
-                primaryKey: true,
-                type: DataTypes.INTEGER
-            },
+//            runid: {
+//                allowNull: false,
+//                autoIncrement: true,
+//                primaryKey: true,
+//                type: DataTypes.INTEGER
+//            },
             distance: {
                 type: DataTypes.DECIMAL,
                 allowNull: false,
@@ -57,28 +57,18 @@ module.exports = function (sequelize, DataTypes) {
                 type: DataTypes.DECIMAL,
                 allowNull: true,
                 validate: {}
-            },
-            // It is possible to create foreign keys:
-            // user_ID: {
-            //   type: DataTypes.INTEGER,
-            //   references: {
-            //     // This is a reference to another model
-            //     model: Runner,
-            //     // This is the column name of the referenced model
-            //     key: 'userid',
-            //     // This declares when to check the foreign key constraint. PostgreSQL only.
-            //     deferrable: DataTypes.Deferrable.INITIALLY_IMMEDIATE
-            //   }
-            // }
+            }
 
-        }
-        //                               , {
-        //        classMethods: {
-        //            associate: function (models) {
-        //                Run.hasOne(models.db.Runner);
-        //            }
-        //        }
-        //    }
-    );
+        });
+        
+    Run.associate = function(models) {
+        Run.belongsTo(models.Runner, {
+            foreignKey: {
+                allowNull: false
+            }
+        });
+    };
+    
+    
     return Run;
 };
