@@ -26,6 +26,13 @@ var FinalAdjustedTimeG;
 //     '6km' :[6, .777]}
 //   };
 
+//need to install require js to make this work
+// var keys = require("../../keys.js");
+// var googlemapsG = keys.google.id;
+// var darkskyG = keys.darksky.id;
+
+
+
 $("#calculate-button").on("click", 
 
 //_________________________________________________________________
