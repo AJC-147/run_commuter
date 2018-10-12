@@ -399,22 +399,22 @@ function runCalculations() { //start of massive call. Have snacks on hand.
   //AG% CALCULATOR
   //---------———————————————————————————————————————————–––––––––––––
 
-//   function AGCalc (gender, age, distance, hours, minutes, seconds) {
-//     age = parseFloat(age), totalTime = parseFloat((hours*60*60) + (minutes*60)+ seconds);
-//     if (gender === 'm'){
-//       var offset = mens[age][distance][1];
-//       var AGadj = (mens['OC'][distance][1])/offset;
-//       pAGP = AGadj/totalTime;
-//     }
-//     if (gender === 'f'){
-//       var offset = womens[age][distance][1];
-//       var AGadj = (womens['OC'][distance][1])/offset;
-//       pAGP = AGadj/totalTime;
-//     }
-//      $("#race-ag").html(pAGP);
+  function AGCalc (gender, age, distance, hours, minutes, seconds) {
+    age = parseFloat(age), totalTime = parseFloat((hours*60*60) + (minutes*60)+ seconds);
+    if (gender === 'm'){
+      var offset = mens[age][distance][1];
+      var AGadj = (mens['OC'][distance][1])/offset;
+      pAGP = AGadj/totalTime;
+    }
+    if (gender === 'f'){
+      var offset = womens[age][distance][1];
+      var AGadj = (womens['OC'][distance][1])/offset;
+      pAGP = AGadj/totalTime;
+    }
+     $("#race-ag").html(pAGP);
      
-//     }
-//     console.log("Your AG% is: " +AGCalc('f', 50, '5km', 3000));
+    }
+    console.log("Your AG% is: " +AGCalc('f', 50, '5km', 3000));
 
 
 
