@@ -1,4 +1,3 @@
-//var db = require("../models");
 var bcrypt = require("bcrypt-nodejs");
 
 'use strict';
@@ -21,7 +20,7 @@ module.exports = function (sequelize, DataTypes) {
                 validate: {}
             },
             averagePace: {
-                type: DataTypes.TIME,
+                type: DataTypes.DECIMAL(5,2),
                 allowNull: false,
                 validate: {}
             },
