@@ -2,8 +2,8 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="/logout">
-        Logout
-      </a>
+                Logout
+            </a>
         </div>
     </div>
 </nav>
@@ -29,8 +29,8 @@
             <!-- Data-target needs to equal the id of the links you want -->
 
             <a href="#" class="sidenav-trigger" data-target="drop-link">
-          <i class="material-icons">menu</i>
-        </a>
+                <i class="material-icons">menu</i>
+            </a>
 
             <!-- Class right moves the UL to the right -->
             <!-- class hide-on-med makes the list items toggle.  -->
@@ -46,8 +46,9 @@
                     <a href="">Contact</a>
                 </li>
                 <li>
-                    <a href="" class="btn white blue-text">Login</a>
-                </li>
+                    <a class="navbar-brand" href="/logout">
+                        Logout
+                    </a> </li>
             </ul>
         </div>
     </nav>
@@ -199,7 +200,7 @@
 <script>
     // Need this for the side nav bar to be responsive.
     // Put at the end of the html
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('.sidenav').sidenav();
     });
     $('.dropdown-trigger').dropdown();
