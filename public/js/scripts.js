@@ -26,6 +26,9 @@ var FinalAdjustedTimeG;
 //     '6km' :[6, .777]}
 //   };
 
+
+
+
 $("#calculate-button").on("click", 
 
 //_________________________________________________________________
@@ -41,7 +44,7 @@ function geocode() {
     axios.get("https://maps.googleapis.com/maps/api/geocode/json", {
             params: {
                 address: location,
-                key: "AIzaSyBZsXrosKvRGdreWJo2EPOxhvxor5LBaBQ"
+                key: googlemapsG
             }
         })
         .then(function (response) {
@@ -82,7 +85,7 @@ function tempInput(lat, long) {
     // console.log(lngLatArray);
     // var long= lngResult;
     // var lat= latResult;
-    var queryURL = "https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/91a177081e40dcac6289e7c200157364/" + lat + "," + long;
+    var queryURL = "https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/"+ darkskyG + "/" + lat + "," + long;
 
     $.ajax({
         url: queryURL,
