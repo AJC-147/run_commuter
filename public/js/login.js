@@ -20,6 +20,7 @@ $(document).ready(function() {
   });
 
   function loginUser(email, password) {
+    debugger;
     $.post("/api/login", {
       email: email,
       password: password
