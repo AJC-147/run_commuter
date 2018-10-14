@@ -4,12 +4,7 @@ var bcrypt = require("bcrypt-nodejs");
 'use strict';
 module.exports = function (sequelize, DataTypes) {
     var Run = sequelize.define('Run', {
-//            runid: {
-//                allowNull: false,
-//                autoIncrement: true,
-//                primaryKey: true,
-//                type: DataTypes.INTEGER
-//            },
+
             distance: {
                 type: DataTypes.DECIMAL,
                 allowNull: false,
@@ -21,7 +16,7 @@ module.exports = function (sequelize, DataTypes) {
                 validate: {}
             },
             averagePace: {
-                type: DataTypes.TIME,
+                type: DataTypes.DECIMAL(5,2),
                 allowNull: false,
                 validate: {}
             },
@@ -45,6 +40,11 @@ module.exports = function (sequelize, DataTypes) {
                 }
             },
             temperature: {
+                type: DataTypes.DECIMAL,
+                allowNull: true,
+                validate: {}
+            },
+            tempPace: {
                 type: DataTypes.DECIMAL,
                 allowNull: true,
                 validate: {}

@@ -9,13 +9,18 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: false,
             unique: true,
             validate: {
-                isEmail: true
+                isEmail: true,
+                len: [1, 100]
             }
         },
         password: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            validate: {
+                len: [1, 100]
+            }
         }
+
     });
     User.prototype.validPassword = function (password) {
         return bcrypt.compareSync(password, this.password);

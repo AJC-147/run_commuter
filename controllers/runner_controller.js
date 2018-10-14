@@ -7,12 +7,31 @@ var isAuthenticated = require("../config/middleware/isAuthenticated");
 module.exports = function (app) {
 
     app.post("/api/signup", function (req, res) {
+        console.log("signupapi")
         console.log(req.body);
         db.User.create({
             email: req.body.email,
             password: req.body.password
         }).then(function () {
-            res.redirect(307, "/api/login");
+            res.redirect(307, "/api/create_runner");
+        }).catch(function (err) {
+            console.log(err);
+            res.json(err);
+        });
+    });
+    
+    app.post("/api/create", function (req, res) {
+        console.log("createapi")
+        console.log(req.body);
+        db.Runner.create({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            city: req.body.city,
+            sex: req.body.sex,
+            dob: req.body.dob,
+            UserId: req.user.id
+        }).then(function () {
+            res.redirect(307, "/api/runner_created");
         }).catch(function (err) {
             console.log(err);
             res.json(err);
@@ -20,17 +39,18 @@ module.exports = function (app) {
     });
 
 
-    app.get("/members", function (req, res) {
+    app.get("/members", isAuthenticated, function (req, res) {
         db.User.findAll({
                 where: {
-                    email: req.user.email
+                    id: req.user.id
                 }
             })
             .then(function (dbUser) {
+                console.log("dbUser");
                 console.log(dbUser);
                 var data = {
-                    User: dbUser
-                    //            runners: dbrunners,
+                    User: dbUser,
+//                    Runner: dbrunners,
                     //            runs: dbruns
                 };
                 console.log(req.user)
