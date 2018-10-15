@@ -55,14 +55,14 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <h4>Welcome, {{#each User}}<span>{{this.email}}</span> {{/each}}<span class="member-name"></span>
-            {{!-- <h3>Welcome, {{#each Runner}}<span>{{this.firstName}}</span> {{/each}}<span class="member-name"></span> --}}
-            </h4>
+            <h4>Your Run History</h4>
             <hr>
         </div>
     </div>
 </div>
 {{!-- END WELCOME MESSAGE --}}
+
+
 
 
 <!-- MODAL STRUCTURE -->
@@ -127,66 +127,78 @@
 <!-- Start Main Section -->
 
 <!--Temp based on geolocation -->
-<div class="container" id="middle-container">
+<div class="container" id="run-data-container">
+    {{#each Runs}}<span>
     <div class="row">
-        <div class="col s12 m3 l3">
-            <h5 class="flow-text">Today's Forecast</h5>
+        <div class="col s12 m1 l1">
+          <label>Date: {{this.dateTime}}</label> 
         </div>
-        <div class="forecast-header col s12 m3 l3">
-            <label>Temperature (F)</label>
-            <div id="today-temp"></div>
+        <div class="col s12 m1 l1">
+            <label>Location: {{this.location}}</label>
         </div>
-        <div class="forecast-header col s12 m3 l3">
-            <label>Dew Point</label>
-            <div id="today-dew"></div>
+        <div class="col s12 m1 l1">
+            <label>Temperature:{{this.temperature}}</label>
         </div>
-
-        <div class="forecast-header col s12 m3 l3">
-            <label>Wind Speed (MPH)</label>
-            <div id="today-ws"></div>
+        <div class="col s12 m1 l1">
+            <label>Wind Speed: {{this.windMPH}}</label>
+        </div>
+        <div class="col s12 m1 l1">
+            <label>Dew Point: {{this.dewPoint}}</label>
+        </div>
+        <div class="col s12 m1 l1">
+            <label>Distance: {{this.distance}}</label>
+        </div>
+        <div class="col s12 m1 l1">
+            <label>Duration:{{this.totalTime}}</label>
+        </div>
+        <div class="col s12 m1 l1">
+            <label>Actual Pace:{{this.averagePace}}</label>
+        </div>
+        <div class="col s12 m1 l1">
+            <label>Base Pace:{{this.tempPace}}</label>
         </div>
 
     </div>
+</span> {{/each}}
 
-
+</div>
+<div class="container" id="run-data-container">
+    {{#each Runs}}<span>
     <div class="row">
-        <div class="col s12 m2 l2">
-            <label>Latitude</label>
-            <div id="latitude"></div>
+        <div class="col s12 m1 l1">
+          <p>Date: {{this.dateTime}}</p> 
         </div>
-        <div class="col s12 m2 l2">
-            <label>Longitude</label>
-            <div id="longitude"></div>
+        <div class="col s12 m1 l1">
+            <p>Location: {{this.location}}</p>
         </div>
-        {{!-- <div class="col s12 m4 l4">
-            <label>Location</label>
-            <div id="curr-location"></div>
-        </div> --}}
+        <div class="col s12 m1 l1">
+            <p>Temperature:{{this.temperature}}</p>
+        </div>
+        <div class="col s12 m1 l1">
+            <p>Wind Speed: {{this.windMPH}}</p>
+        </div>
+        <div class="col s12 m1 l1">
+            <p>Dew Point: {{this.dewPoint}}</p>
+        </div>
+        <div class="col s12 m1 l1">
+            <p>Distance: {{this.distance}}</p>
+        </div>
+        <div class="col s12 m1 l1">
+            <p>Duration:{{this.totalTime}}</p>
+        </div>
+        <div class="col s12 m1 l1">
+            <p>Actual Pace:{{this.averagePace}}</p>
+        </div>
+        <div class="col s12 m1 l1">
+            <p>Base Pace:{{this.tempPace}}</p>
+        </div>
+
     </div>
+</span> {{/each}}
+
 </div>
 
-<div class="container" id="another-container">
-<div class="row">
-    {{!-- <div class="col s12 m2 l2">
-        <label>Your Race Pace</label>
-        <div id="race-pace"></div>
-    </div>
-    <div class="col s12 m2 l2" id="race-ag">
-        <label>Your Age Grade</label>
-    </div> --}}
-    <div class="col s12 m4 l4">
-        <label>Predicted Race Times</label>
-        <div id="predicted-time"></div>
-    </div>
-    <div class="col s12 m2 l2">
-        <label>Predicted Paces</label>
-        <div id="predicted-pace"></div>
-    </div>
-    <div class="col s12 m2 l2" id="predicted-ag">
-        <!-- <label>Predicted Age Grade</label> -->
-    </div>
-</div>
-</div>
+
 
 
 <!-- Script CDNS -->
@@ -205,113 +217,31 @@
     $('.dropdown-trigger').dropdown();
 
 //_________________________________________________________________
-//RIEGEL FORMULA - predicting today's 5k/10k/HMP
-//---------———————————————————————————————————————————–––––––––––––  
-
-function velocityRiegel(D1, T1, D2) {
-    // using Riegel prediction formula t2 = t1 × (d2 / d1)1.06:
-    if (D2===3.1){
-        tempo = `5k`;
-        type = `Speed Work`;
-    }
-    else if (D2===6.2){
-        tempo = `10k`;
-        type = `Short Tempo`;
-    }
-    else if (D2===13.1){
-        tempo = `HMP`;
-        type = `Long Tempo`;
-    }
-    else {
-        tempo = D2;
-        type = "";
-    }
-    var distances = D2 / D1;
-    var distPow = Math.pow(distances, 1.07);
-    //1.07 is standard for non-pro runners in Riegel formula
-    var T2secs = T1 * distPow; //this is now the new predicted time in seconds
-    var T2pace = Math.floor(T2secs / D2);
-    console.log("T2pace:" + T2pace);
-    console.log("T2secs:" + T2secs);
-
-    console.log("tempo: "+tempo);
-    console.log("moment says: " + moment().startOf('day').seconds(T2secs).format('H:mm:ss'));
-    $(`#predicted-time`).append(`<div><b>${tempo}</b>: ${moment().startOf('day').seconds(T2secs).format('H:mm:ss')} </div>`);
-    $(`#predicted-pace`).append(`<div><b>${tempo}</b> ${type}: ${moment().startOf('day').seconds(T2pace).format('mm:ss')} </div>`);
-}
-//velocityRiegel(13.1, 7200, 26.2);
-velocityRiegel(13.1, 7200, 3.1);
-velocityRiegel(13.1, 7200, 6.2);
-velocityRiegel(13.1, 7200, 13.1);
-
-
-//_________________________________________________________________
-//DARK SKY API W/ BROWSER GEOLOCATION
-//---------———————————————————————————————————————————–––––––––––––  
-
-function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-    } else { 
-        $("#curr-location").html("<div>Geolocation is not supported by this browser.<div>");
-    }
-}
-
-function showPosition(position) {
-    // alert("this is location" + position.coords.latitude+position.coords.longitude) ;
-    $("#latitude").html("<div>" + position.coords.latitude + "</div>"); 
-    $("#longitude").html("<div>" + position.coords.longitude + "</div>"); 
-    // userLatG = position.coords.latitude;
-    // userLonG = position.coords.longitude;
-    tempInput(position.coords.latitude, position.coords.longitude);
-}
-
-$(document).ready(function() {
-    getLocation();
-});
-
-
-//_________________________________________________________________
-//DARK SKY API CALL
-//---------———————————————————————————————————————————–––––––––––––  
-function tempInput(lat, long) {
-
-    console.log("long: " + long);
-    console.log("lat: " + lat);
-    // var long= lngLatArray[1];
-    // var lat= lngLatArray[0];
-    console.log("long/lattitude:")
-    // console.log(lngLatArray);
-    // var long= lngResult;
-    // var lat= latResult;
-    var queryURL = "https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/"+ darkskyG + "/" + lat + "," + long;
-
-    $.ajax({
-        url: queryURL,
-        method: "GET"
-    }).then(function(response1) {
-        console.log("darkskyAPI:"+ response1 )
-        var currentTemp = response1.currently.temperature;
-        var currentDew = response1.currently.dewPoint;
-        var currentWs = response1.currently.windSpeed;
-        
-        // Appending weather info onto DOM
-        $("#today-temp").html("<div>" + currentTemp + "</div>");
-
-        $("#today-dew").html("<div>" + currentDew + "</div>");
-
-        $("#today-ws").html("<div>" + currentWs + "</div>");
-    });
-};
-
-//_________________________________________________________________
 //ADD RUN MODAL
 //---------———————————————————————————————————————————–––––––––––––  
 
 $(document).ready(function(){
     $('.modal').modal();
   });
-          
+
+
+$(document).ready(function () {
+    ajax.get("/members/runs", {
+            // params: { //don't need these b/c not passing other args
+            //     address: location,
+            //     key: googlemapsG
+            // }
+        })
+        .then(function (response) { //response is what's getting returned in das api call
+            console.log(`fastest pace: ${response}`);
+            fastestPaceG = response.averagePace;
+            fastestDistanceG = response.distance;
+            fastestTempG = response.temperature;
+            fastestWindMPHG = response.windMPH;
+            fastestdewPoint = response.dewPoint;
+            // $("#fast-pace").html("<div>" + fastestPaceG + "</div>");
+        });
+});
 
 
 </script>

@@ -23,6 +23,11 @@ module.exports = function (app) {
         
         res.render("signup_runner");
     });
+    
+    app.get("/all_runs", isAuthenticated, function (req, res) {
+        
+        res.render("all_runs");
+    });
 
     app.get("/logout", function (req, res) {
         req.logout();
