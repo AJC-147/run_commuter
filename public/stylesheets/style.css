@@ -25,3 +25,7 @@ nav .brand-logo-red {
     padding: 0;
     left: 50%;
 }
+
+select {
+    display: flex !important;
+}
