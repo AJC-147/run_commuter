@@ -16,8 +16,8 @@ var cDewG; //FROM API CALL
 var FinalAdjustedPaceG = []; // final adjusted paces in MM:SS-MM:SS
 var FinalAdjustedTimeG;
 // var pAGP; // AG% of past race time, calculated/ assinged to function AGCalc
-// var runnerGender;
-// var runnerAge;
+var runnerGenderG;
+var runnerAgeG;
 // var womens = {
 //     OC:{'5km': [3.1, 886]},
 //     '50': {'5km':[3.1, 0.8937],	
@@ -139,10 +139,10 @@ function runCalculations() { //start of massive call. Have snacks on hand.
 
     pTempG = $("#p-temp").val();
     pDewG = $("#p-dew").val();
-    gender = $("#select-gender").val();
+    runnerGenderG = $("#select-gender").val();
     console.log("gender: " + gender);
-    runnerAge = $("#age").val();
-    console.log("runnerAge: " + runnerAge);
+    runnerAgeG = $("#age").val();
+    console.log("runnerAgeG: " + runnerAgeG);
 
 
     //_________________________________________________________________
@@ -435,7 +435,7 @@ function runCalculations() { //start of massive call. Have snacks on hand.
     adjustedPace(basePaceG, cWindSecOffsetG, cHeatSecOffsetG);
     console.log("FinalAdjustedPaceG: " + FinalAdjustedPaceG);
     predictRunTime (FinalAdjustedPaceG[0], pRunDistG);
-    // AGCalc (runnerGender, runnerAge, pRunDistG, pHoursG, pMinutesG, pSecondsG);
+    AGCalc (runnerGenderG, runnerAgeG, pRunDistG, pHoursG, pMinutesG, pSecondsG);
 
 
 

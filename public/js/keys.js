@@ -1,4 +1,4 @@
-console.log('keys are loaded');
+// console.log('keys are loaded');
 
 var googlemapsG = "AIzaSyBZsXrosKvRGdreWJo2EPOxhvxor5LBaBQ";
 
