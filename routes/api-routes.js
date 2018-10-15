@@ -43,5 +43,25 @@ module.exports = function (app) {
             });
         }
     });
+    app.get("/api/all_runs", function (req, res) {
+        if (!req.user || !req.runner) {
+            res.json({});
+        } else { 
+            console.log(req.body);
+            res.json({
+                distance: req.run.distance,
+                totalTime: req.run.totalTime,
+                averagePace: req.run.averagePace,
+                agPercent: req.run.agPercent,
+                dateTime: req.run.dateTime,
+                location: req.run.location,
+                temperature: req.run.temperature,
+                tempPace: req.run.tempPace,
+                windMPH: req.run.windMPH,
+                dewPoint: req.run.dewPoint,
+                
+            });
+        }
+    });
 
 };
