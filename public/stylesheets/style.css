@@ -10,3 +10,8 @@ form.login {
 /* body {
   background-color: blue;
 } */
+
+[type="radio"]:not(:checked), [type="radio"]:checked {
+    position: absolute;
+    opacity: 1;
+     pointer-events: all; 
