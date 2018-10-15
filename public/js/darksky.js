@@ -25,10 +25,6 @@ function showPosition(position) {
     tempInput(position.coords.latitude, position.coords.longitude);
 }
 
-$(document).ready(function() {
-    getLocation();
-});
-
 
 //_________________________________________________________________
 //DARK SKY API CALL
@@ -64,6 +60,10 @@ function tempInput(lat, long) {
     });
 };
 
+$(document).ready(function() {
+    getLocation();
+});
+
 //_________________________________________________________________
 //ADD RUN MODAL
 //---------———————————————————————————————————————————–––––––––––––  
@@ -71,4 +71,6 @@ function tempInput(lat, long) {
 $(document).ready(function(){
     $('.modal').modal();
   });
+
+
           
