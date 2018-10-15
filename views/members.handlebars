@@ -10,9 +10,12 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <h2>Welcome <span class="member-name"></span></h2>
+            <h2>Welcome
+                <span class="member-name"></span>
+            </h2>
             <br>
-            <hr><br> {{#each User}}
+            <hr>
+            <br> {{#each User}}
 
             <span>{{this.email}}</span> {{/each}}
 
@@ -37,7 +40,7 @@
 
             <ul class="right hide-on-med-and-down">
                 <li>
-                    <a href="index.html">Home</a>
+                    <a href="/members">Home</a>
                 </li>
                 <li>
                     <a href="">About</a>
@@ -49,7 +52,8 @@
                 <li>
                     <a class="navbar-brand" href="/logout">
                         Logout
-                    </a> </li>
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -68,22 +72,74 @@
     </li>
     <li>
         <a class="navbar-brand" href="/logout">
-                        Logout</a>
+            Logout</a>
     </li>
 </ul>
 <!-- Start Main Section -->
 
 
 <!-- Modal Structure -->
-  <div id="modal1" class="modal">
+<div id="modal1" class="modal">
     <div class="modal-content">
-      <h4>Modal Header</h4>
-      <p>A bunch of text</p>
+        <h5 class="flow-text">Enter Race Info:</h5>
+        <div id="race-header">
+        </div>
+        <div class="row">
+
+            <div class="input-field col s4 m4 l4">
+                <input placeholder="00" id="p-run-hours" type="text" class="validate" maxlength="3">
+                <label for="p-run-hours">Hour(s)</label>
+            </div>
+            <div class="input-field col s4 m4 l4">
+                <input placeholder="00" id="p-run-mins" type="text" class="validate" maxlength="2">
+                <label for="p-run-mins">Minute(s)</label>
+            </div>
+            <div class="input-field col s4 m4 l4">
+                <input placeholder="00" id="p-run-secs" type="text" class="validate" maxlength="2">
+                <label for="p-run-secs">Second(s)</label>
+            </div>
+            <!-- End Race time info -->
+            <div class="row">
+                <div class="input-field col s3 m3 l3">
+                    <input placeholder="00 " id="p-run-dist" type="text" class="validate" maxlength="4">
+                    <label for="p-run-dist"> Race Distance (Miles)</label>
+                </div>
+                <div class="input-field col s3 m3 l3">
+                    <input placeholder="i.e. 63" id="p-dew" type="text" class="validate" maxlength="3">
+                    <label for="p-dew">Race Dewpoint</label>
+                </div>
+                <div class="input-field col s3 m3 l3">
+                    <input placeholder="i.e. " id="p-temp" type="text" class="validate" maxlength="3">
+                    <label for="p-temp">Race Temperature (F)</label>
+                </div>
+                <div class="input-field col s3 m3 l3">
+                    <input placeholder="00" id="p-wind-mph" type="text" class="validate" maxlength="3">
+                    <label for="p-wind-mph"> Wind Speed (MPH)</label>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="input-field col s4 m4 l4">
+                <input placeholder="City,State" id="current-location" type="text" class="validate">
+                <label for="current-location">Enter Your current Location</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="btn pulse blue waves-effect waves-light col s12 m3 l3" id="calculate-button">Calculate</div>
+            <div class="col s12 m3 l3"></div>
+            <a href="/members">
+                <div class="btn  blue waves-effect waves-light col s12 m2 l2" id="reset-button">Reset </div>
+            </a>
+
+        </div>
     </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
-    </div>
-  </div>
+</div>
+<div class="modal-footer">
+    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+</div>
+</div>
 
 
 <!--Fields Below this will populate After User Input -->
@@ -121,41 +177,37 @@
             <label>Location</label>
             <div id="curr-location"></div>
         </div>
-        </div>
     </div>
+</div>
 
-    <div class="row">
-        <div class="col s12 m2 l2">
-            <label>Your Race Pace</label>
-            <div id="race-pace"></div>
-        </div>
-        <div class="col s12 m2 l2" id="race-ag">
-            <label>Your Age Grade</label>
-        </div>
-        <div class="col s12 m4 l4">
-            <label>Predicted Run Time</label>
-            <div id="predicted-time"></div>
-        </div>
-        <div class="col s12 m2 l2">
-            <label>Today's Predicted Pace</label>
-            <div id="predicted-pace"></div>
-        </div>
-        <div class="col s12 m2 l2" id="predicted-ag">
-            <!-- <label>Predicted Age Grade</label> -->
-        </div>
+<div class="row">
+    <div class="col s12 m2 l2">
+        <label>Your Race Pace</label>
+        <div id="race-pace"></div>
     </div>
+    <div class="col s12 m2 l2" id="race-ag">
+        <label>Your Age Grade</label>
+    </div>
+    <div class="col s12 m4 l4">
+        <label>Predicted Run Time</label>
+        <div id="predicted-time"></div>
+    </div>
+    <div class="col s12 m2 l2">
+        <label>Today's Predicted Pace</label>
+        <div id="predicted-pace"></div>
+    </div>
+    <div class="col s12 m2 l2" id="predicted-ag">
+        <!-- <label>Predicted Age Grade</label> -->
+    </div>
+</div>
 </div>
 </div>
 
 
 
 <div class="container" id="top-container">
+    {{!--
     <div class="row">
-        {{!-- NAME DIV, DON'T NEED THIS --}}
-        {{!-- <div class=" input-field col s4 m4 l4"> 
-            <input placeholder="Full Name" id="full-name" type="text" class="validate">
-            <label for="full_name">Enter your Name</label>
-        </div> --}}
         <div class=" input-field col s4 m4 l4">
             <input placeholder="Type M/F" id="select-gender" type="text" class="validate" maxlength="1">
             <label for="select-gender">Enter Gender</label>
@@ -165,7 +217,7 @@
             <label for="age">Your Age</label>
         </div>
 
-    </div>
+    </div> --}}
 
     <!-- Start Race-time Info -->
     <div id="race-header">
@@ -186,6 +238,7 @@
             <label for="p-run-secs">Second(s)</label>
         </div>
         <!-- End Race time info -->
+        {{!--
         <div class="row">
             <div class="input-field col s3 m3 l3">
                 <input placeholder="00 " id="p-run-dist" type="text" class="validate" maxlength="4">
@@ -220,7 +273,7 @@
             <div class="btn  blue waves-effect waves-light col s12 m2 l2" id="reset-button">Reset </div>
         </a>
 
-    </div>
+    </div> --}}
 </div>
 
 
@@ -239,6 +292,6 @@
     $('.dropdown-trigger').dropdown();
 
 </script>
-<script type="text/javascript" src="js/darksky.js"></script>
-{{!-- <script type="text/javascript" src="js/scripts.js"></script> --}}
+<script type="text/javascript" src="js/darksky.js"></script> 
+<script type="text/javascript" src="js/scripts.js"></script>
 <script type="text/javascript" src="js/members.js"></script>
